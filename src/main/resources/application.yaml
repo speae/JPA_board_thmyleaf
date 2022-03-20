@@ -1,0 +1,32 @@
+server:
+  shutdown: graceful
+  port: 8080
+  servlet:
+    context-path: /iksu
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  thymeleaf:
+    prefix: classpath:templates/
+    suffix: .html
+    cache: false
+    enabled: true
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  profiles:
+    active: -prod
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    driver-class-name: oracle.jdbc.OracleDriver
+    username: c##speae
+    password: shqk1492
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true

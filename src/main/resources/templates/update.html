@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <title>2016 굿모닝 경기 소통 크리에이터 공모전</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/general.css}" >
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.scrollTo-min.js}"></script>
+    <script th:src="@{/js/layout.js}"></script>
+
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<div id="wrap">
+    <!-- @ CONTAINER -->
+    <section id="container" class="sub">
+        <!-- @ CONTENTS -->
+        <div id="contents">
+            <div class="sub-title-area">
+                <h2 class="tit">News & Info </h2>
+            </div>
+            <form th:method="put" th:object="${boardCreateRequest}" th:action="@{/updater}" enctype="multipart/form-data">
+                <!-- input type hidden으로 Long type의 data를 보낼 시 Content type 'application/octet-stream' not supported -->
+                <input type="hidden" id="numString" name="num" th:value="${num}">
+                <input type="hidden" id="idString" name="fileId" th:value="${fileId}">
+                <input type="hidden" id="readCount" name="readCount" th:field="*{readCount}">
+
+                <table class="basic_write">
+                    <caption>News 입력</caption>
+                    <colgroup>
+                        <col style="width:150px">
+                        <col style="width:150px">
+                    </colgroup>
+                    <tr>
+                        <th>글번호<span class="star">*</span></th>
+                        <td><input type="text" title="글번호" name="num" id="num" th:value="${num}" class="add_txt" th:text="${num}"></td>
+                    </tr>
+                    <tr>
+                        <th>조회수<span class="star">*</span></th>
+                        <td><input type="text" title="조회수" name="readCount" th:field="*{readCount}" class="add_txt" th:text="${boardCreateRequest.readCount}"></td>
+                    </tr>
+                    <tr>
+                        <th>제목<span class="star">*</span></th>
+                        <td><input type="text" title="제목" name="subject" th:field="*{subject}" class="add_txt" th:placeholder="${boardCreateRequest.subject}"></td>
+                    </tr>
+                    <tr>
+                        <th>작성자<span class="star">*</span></th>
+                        <td><input type="text" title="성명" name="nickname" th:field="*{nickname}" class="name_txt" th:placeholder="${boardCreateRequest.nickname}"></td>
+                    </tr>
+
+                    <tr>
+                        <th>첨부파일</th>
+                        <td>
+                            <input type="file" title="첨부파일" name="fileName" placeholder="학과/부서" class="name_txt">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>내용 <span class="star">*</span></th>
+                        <td>
+<!--                            <input type="text" th:field="*{content}" th:placeholder="${boardCreateRequest.content}" />-->
+                            <label>
+                                <textarea name="content" th:field="*{content}" th:placeholder="*{content}" cols="30" rows="10" style="width:100%"></textarea>
+                            </label>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="btn_area">
+                    <button type="submit" class="btn_blue">확인</button>
+                    <a th:href="@{/list}" class="btn_blue_line">취소</a>
+                </div>
+            </form>
+
+        </div>
+        <!-- CONTENTS @ -->
+    </section>
+    <!-- CONTAINER @ -->
+</div>
+<!--<h1>HELLO</h1>-->
+<script>
+    let num = $("#numString").val()
+    num = num.toString();
+
+    let id = $("#idString").val()
+    id = id.toString();
+
+    let readCount = $("#readCount").val()
+    readCount = readCount.toString();
+
+    console.log(num);
+    console.log(typeof id);
+    console.log(typeof readCount);
+
+    // $.ajax({
+    //     data: {
+    //         num: num,
+    //         id: id
+    //     },
+    //     success: function (data){
+    //         console.log(typeof num);
+    //         console.log(typeof id);
+    //     },
+    //     error: function (){
+    //         console.log("error");
+    //     }
+    // })
+</script>
+</body>
+</html>
