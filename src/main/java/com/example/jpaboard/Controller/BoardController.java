@@ -98,26 +98,6 @@ public class BoardController {
             String filePath = savePath + "\\" + filename;
             file.transferTo(new File(filePath));
 
-
-//            FileCreateRequest fileCreateRequest = new FileCreateRequest.Builder(
-//                    filename,
-//                    originFilename,
-//                    filePath
-//            ).build();
-
-//            Long fileid = fileService.setFile(fileCreateRequest);
-//            log.info("file id :: {}", fileid);
-//
-//            JpaFile files = fileService.getFileId(fileid);
-//
-//            BoardCreateRequest boardCreateRequest = new BoardCreateRequest.Builder(
-//                    LocalDate.now(),
-//                    nickname,
-//                    subject,
-//                    content,
-//                    files
-//            ).build();
-
             JpaFile jpaFile = fileService.setFile(filename, originFilename, filePath);
             Long fileId = jpaFile.getId();
             log.info("file id :: {}", fileId);
@@ -160,7 +140,6 @@ public class BoardController {
     }
 
     // 기존 게시글 중 하나의 글제목을 클릭 시 뜨는 화면
-    // @RequestPart Long fileId
     @PostMapping("update/{num}")
     public ModelAndView getBoardWriteById(@PathVariable Long num, @RequestPart String fileId){
 
@@ -242,64 +221,4 @@ public class BoardController {
 
         return null;
     }
-
-//    @PutMapping(value = "updater", consumes = MediaType.MULTIPART_MIXED_VALUE)
-//    public ModelAndView setBoardList(@RequestPart MultipartFile fileName, @RequestPart Long num, @RequestPart Long readCount, @RequestPart String nickname, @RequestPart String subject, @RequestPart String content){
-//
-//        try {
-//            String originFilename = fileName.getOriginalFilename();
-//            String filename = new MD5Generator(Objects.requireNonNull(originFilename)).toString();
-//            String savePath = System.getProperty("user.dir") + "\\연습용 다운로드 파일";
-//            if (!new File(savePath).exists()){
-//                try{
-//                    if(!new File(savePath).mkdir()){
-//                        throw new IOException("폴더 생성 실패.");
-//                    }
-//                }catch (Exception e){
-//                    e.getStackTrace();
-//                }
-//            }
-//
-//            String filePath = savePath + "\\" + filename;
-//            fileName.transferTo(new File(filePath));
-//
-//            FileCreateRequest fileCreateRequest = new FileCreateRequest.Builder(
-//                    filename,
-//                    originFilename,
-//                    filePath
-//            ).build();
-//
-//            Long fileid = fileService.setFile(fileCreateRequest);
-//            log.info("file id :: {}", fileid);
-//
-//            JpaFile jpaFile = fileService.getFileId(fileid);
-//
-//            BoardCreateRequest boardCreateRequest =
-//                    new BoardCreateRequest.Builder(
-//                            readCount,
-//                            LocalDate.now(),
-//                            nickname,
-//                            subject,
-//                            content,
-////                            filename,
-////                            originFilename,
-////                            filePath
-//                            jpaFile
-//                    ).build();
-//
-//            Long boardNum = boardService.getBoardUpdateById(fileid, num, boardCreateRequest);
-//
-//            ModelAndView model = new ModelAndView("redirect:/read/{num}");
-//            model.addObject("boardNum", boardNum);
-//
-//            return model;
-//
-//            //return boardCreateRequest.toString();
-//        } catch (NoSuchAlgorithmException | IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
-
 }
