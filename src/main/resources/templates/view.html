@@ -51,7 +51,7 @@
 <!--                    <a href="javascript: void(0);" th:href="|location.href='@{/update/{num}(num=${num})}'|" class="btn_blue">수정</a>-->
 <!--                    id="idSend"-->
                     <button type="submit"  class="btn_blue">수정</button>
-                    <button type="button" class="btn_blue">삭제</button>
+                    <a th:href="|location.href='@{/delete/{num}(num=${num})}'|" class="btn_blue">삭제</a>
                 </div>
             </div>
             <!-- CONTENTS @ -->

@@ -221,4 +221,15 @@ public class BoardController {
 
         return null;
     }
+
+    // 상세화면 -> 삭제 클릭
+    @DeleteMapping(value = "delete/{num}")
+    // ModelAndView String
+    public ModelAndView deleteBoard(@RequestPart String num){
+
+        Long numParse = Long.parseLong(num);
+        boardService.deleteBoardById(numParse);
+
+        return new ModelAndView("redirect:/list");
+    }
 }

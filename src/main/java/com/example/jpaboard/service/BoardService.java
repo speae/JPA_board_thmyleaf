@@ -141,4 +141,10 @@ public class BoardService {
         return jpaBoard.getNum();
     }
 
+    @Transactional
+    public void deleteBoardById(Long num){
+
+        boardRepository.deleteById(num);
+    }
+
 }
